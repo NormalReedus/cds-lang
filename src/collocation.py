@@ -3,16 +3,34 @@ import argparse # Used for passing arguments from the command line (optional par
 from pathlib import Path # Used to force the format of the passed-in file-directory (optional part of assignment)
 import os # Path concatenation
 import csv # For writing the output file
+import re # For tokenization
 
 def get_files(dir):
 	pass
 
-def cal_collocates(keyword):
+def calc_collocates(keyword):
 	pass
+
+def tokenize(input_string):
+    # Split on any non-alphanumeric character
+    tokenizer = re.compile(r"\W+")
+    
+    # Tokenize 
+    token_list = tokenizer.split(input_string)
+
+    return token_list
 
 
 def main(file_dir, keyword, window_size):
 	outfile = os.path.join('.', 'out', f'{keyword}.csv')
+
+	# Loop through texts and read them
+	# Tokenize text into list
+	# Save N as the total number of tokens
+	# Find indices in the token list of the tokens that match the keyword
+	# Slice +- window size around matching indices
+	# Add all of the tokens in the slice to a list of collocates - we now have a list of all the tokens that appear within `window_size` of the keyword
+	# Calculate the other values - TBD
 
 
 
