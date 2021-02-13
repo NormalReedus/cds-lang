@@ -8,7 +8,7 @@ import re # For tokenization
 def get_files(dir):
 	pass
 
-def calc_collocates(keyword):
+def calc_collocates(keyword): # See https://www.english-corpora.org/mutualInformation.asp and http://www.collocations.de/AM/index.html
 	pass
 
 def tokenize(input_string):
