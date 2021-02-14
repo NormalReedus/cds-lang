@@ -1,4 +1,5 @@
 #!../lang101/Scripts/python
+
 import argparse # Used for passing arguments from the command line (optional part of assignment)
 from pathlib import Path # Used to force the format of the passed-in file-directory (optional part of assignment)
 import os # Path concatenation
@@ -23,6 +24,21 @@ def tokenize(input_string):
 
 def main(file_dir, keyword, window_size):
 	outfile = os.path.join('.', 'out', f'{keyword}.csv')
+	#file_dir = os.path.join('..', 'data', '100_english_novels', 'corpus')
+
+	# The list of all tokens
+	tokens = []
+
+	for novel_path in file_dir.glob('*.txt'): # file_dir is already converted to a Path in ArgumentParser
+		with open(novel_path, 'r', encoding='utf-8') as fh:
+			content = fh.read()
+			tokens += tokenize(content)
+	
+	N = len(tokens)
+
+	keyword_indices = [i for i, token in enumerate(tokens) if token == keyword]
+
+	concordances = [tokens[max(0, i - window_size) : i + window_size + 1] for i in keyword_indices]
 
 	# Loop through texts and read them
 	# Tokenize text into list
@@ -41,7 +57,7 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='Calculate collocates for a specific keyword.')
 	parser.add_argument('file_dir', type=Path, help='the directory containing all of your text files to analyze.')
 	parser.add_argument('keyword', help='the keyword to look for.')
-	parser.add_argument('window_size', type=int, nargs="?", default=10, help='the number of words on both sides of the keyword to look for collocates in.')
+	parser.add_argument('window_size', type=int, nargs="?", default=5, help='the number of words on both sides of the keyword to look for collocates in.')
 	args = parser.parse_args()	
 
 	main(args.file_dir, args.keyword, args.window_size)
