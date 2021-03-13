@@ -1,0 +1,8 @@
+#!/mnt/89e6b5e6-eecf-4b58-baa1-36974b5267f9/dev-school/cds-language-analytics/week6/network_venv/bin/python3
+# -*- coding: utf-8 -*-
+import re
+import sys
+from nbformat.sign import TrustNotebookApp
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(TrustNotebookApp.launch_instance())
